@@ -8,6 +8,7 @@ package pq;
 import java.awt.*;
 import java.util.spi.AbstractResourceBundleProvider;
 
+@SuppressWarnings("unchecked")
 public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
 
     //private Object[] sense;
