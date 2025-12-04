@@ -15,7 +15,8 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
     private int size;
     private static final int DEFAULT_CAPACITY = 10;
 
-    public MyPriorityQueue(int capacity) {
+    @SuppressWarnings("unchecked")
+    public MyPriorityQueue() {
         //sense = new Object[capacity];
         heap = (T[]) new Comparable[DEFAULT_CAPACITY];
         this.size = 0;
@@ -42,12 +43,11 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
 
     private void bubbleUp(int index){
         while(index > 0) {
-            int parent = parent(index);
+            int parentIndex = parent(index);
 
-
-            if(heap[index].compareTo(heap[parent]) < 0) {
-                swap(index, parent);
-                index = parent;
+            if(heap[index].compareTo(heap[parentIndex]) > 0) {
+                swap(index, parentIndex);
+                index = parentIndex;
             } else {
                 break;
             }
@@ -57,16 +57,22 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
 
     private void bubbleDown(int index){
         //think through this.
-        while(index > 0) {
+        while(leftChild(index) < size) {
             int leftChild = leftChild(index);
+            int largeValue = leftChild;
             int rightChild = rightChild(index);
 
-            if (heap[leftChild].compareTo(heap[rightChild]) > 0) {
-                swap(index, leftChild);
-                index = leftChild;
+            if(rightChild < size && heap[rightChild].compareTo(heap[leftChild]) > 0) {
+                largeValue = rightChild;
+            }
+
+            if(heap[index].compareTo(heap[rightChild]) < 0) {
+                swap(index, rightChild);
+                index = rightChild;
             } else {
                 break;
             }
+
         }
     }
 
@@ -83,8 +89,8 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
         if(size == heap.length){
             resize();
         }
-        heap[heap.length - 1] = t;
-        bubbleUp(heap.length - 1);
+        heap[size] = t;
+        bubbleUp(size);
 
         size++;
     }
@@ -114,26 +120,34 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
         size=0;
     }
     public boolean contains(Object o) {
-        for(int i = 0; i < heap.length; i++) {
-            if (heap[i] == o) {
+        for(int i = 0; i < size; i++) {
+            if (heap[i].equals(o) && heap[i] != null) {
                 return true;
             }
         }
         return false;
     }
     public T peek() {
+        if(size == 0){
+            return null;
+        }
         return heap[0];
     }
     public T remove() {
         if(size == 0) {
             return null;
-        } else {
-            T t1 = heap[heap.length - 1];
-            heap[heap.length-1] = null;
-            bubbleDown(heap.length - 1);
-            size--;
-            return t1;
         }
+        T t1 = heap[0];
+        heap[0] = heap[size-1];
+        heap[size-1] = null;
+        size--;
+
+        if(size > 0) {
+            bubbleDown(0);
+        }
+
+        return t1;
+
 
     }
     public int size() {
