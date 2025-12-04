@@ -59,17 +59,17 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
     private void bubbleDown(int index){
         //think through this.
         while(leftChild(index) < size) {
-            int leftChild = leftChild(index);
-            int largeValue = leftChild;
-            int rightChild = rightChild(index);
+            int leftChildValue = leftChild(index);
+            int largeValue = leftChildValue;
+            int rightChildValue = rightChild(index);
 
-            if(rightChild < size && heap[rightChild].compareTo(heap[leftChild]) > 0) {
-                largeValue = rightChild;
+            if(rightChildValue < size && heap[rightChildValue].compareTo(heap[leftChildValue]) > 0) {
+                largeValue = rightChildValue;
             }
 
-            if(heap[index].compareTo(heap[rightChild]) < 0) {
-                swap(index, rightChild);
-                index = rightChild;
+            if(heap[index].compareTo(heap[rightChildValue]) < 0) {
+                swap(index, rightChildValue);
+                index = rightChildValue;
             } else {
                 break;
             }
@@ -121,6 +121,7 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
         size=0;
     }
     public boolean contains(Object o) {
+
         for(int i = 0; i < size; i++) {
             if (heap[i].equals(o) && heap[i] != null) {
                 return true;
