@@ -11,9 +11,9 @@ public class Task implements Comparable<Task> {
     public Task(String name) {
         name = "1";
     }
-    public Task(int priority, String name) {
-        this.priority = priority;
+    public Task(String name, int priority) {
         this.name = name;
+        this.priority = priority;
     }
 
     public String getName() {
@@ -34,16 +34,18 @@ public class Task implements Comparable<Task> {
 
 
     //Fix comparable function - check the logic and implement it correctly. I think sense is right, but let's actually see through the logic here.
-    public int compareToSense(Task t1) {
-        if(t1.getPriority() > priority) return 1;
-        else if(t1.getPriority() < priority) return -1;
-        else return 0;
-    }
 
     //Check over and see which one is right in terms of the implemented logic.
+//    @Override
+//    public int compareTo(Task t1) {
+//        return 1;
+//    }
+
     @Override
-    public int compareTo(Task t1) {
-        return 1;
+    public int compareTo(Task o) {
+        if(o.getPriority() > priority) return 1;
+        else if(o.getPriority() < priority) return -1;
+        else return 0;
     }
 
     @Override
