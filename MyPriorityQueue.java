@@ -62,13 +62,13 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
             int smallestValue = leftChildValue;
             int rightChildValue = rightChild(index);
 
-            if(heap[leftChildValue] == null) break;
+            if(heap[index] == null) break;
 
-            if(rightChildValue < size && heap[rightChildValue] != null && heap[rightChildValue].compareTo(heap[leftChildValue]) < 0) {
+            if(rightChildValue < size && heap[rightChildValue] != null && heap[leftChildValue] != null && heap[rightChildValue].compareTo(heap[leftChildValue]) < 0) {
                 smallestValue = rightChildValue;
             }
 
-            if(heap[smallestValue] != null && heap[index].compareTo(heap[smallestValue]) > 0) {
+            if(heap[smallestValue] != null && heap[index] != null && heap[index].compareTo(heap[smallestValue]) > 0) {
                 swap(index, smallestValue);
                 index = smallestValue;
             } else {
@@ -92,9 +92,10 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
             resize();
         }
         heap[size] = t;
+        size++;
         bubbleUp(size);
 
-        size++;
+        
     }
 
 //    @Override
@@ -126,7 +127,7 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
             return false;
         }
         for(int i = 0; i < size; i++) {
-            if (heap[i].equals(o) && heap[i] != null) {
+            if (heap[i] != null && heap[i].equals(o)) {
                 return true;
             }
         }
