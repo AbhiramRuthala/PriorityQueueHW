@@ -93,7 +93,7 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
         }
         heap[size] = t;
         size++;
-        bubbleUp(size);
+        bubbleUp(size-1);
 
         
     }
