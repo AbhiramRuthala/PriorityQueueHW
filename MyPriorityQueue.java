@@ -35,7 +35,6 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
         return 2 * index + 2;
     }
 
-
     private void swap(int x, int y){
         T sense = heap[x];
         heap[x] = heap[y];
@@ -79,7 +78,7 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
 
     private void resize(){
         T[] tempHeap = (T[]) new Comparable[heap.length * 2];
-        for(int i = 0; i < heap.length; i++){
+        for(int i = 0; i < size; i++){
             tempHeap[i] = heap[i];
         }
         heap = tempHeap;
@@ -115,7 +114,7 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
 //    }
 
     public void clear() {
-        for(int i=0; i<heap.length; i++){
+        for(int i=0; i<size; i++){
             heap[i] = null;
         }
         size=0;
