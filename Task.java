@@ -44,10 +44,8 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int compareTo(Task o) {
-        if(o == null) return -1;
-        if(o.getPriority() > this.priority) return -1;
-        else if(o.getPriority() < this.priority) return 1;
-        else return 0;
+        if(o == null) return 1;
+        return Integer.compare(o.priority, this.priority);
     }
 
     @Override
