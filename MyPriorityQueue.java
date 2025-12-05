@@ -46,7 +46,7 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
         while(index > 0) {
             int parentIndex = parent(index);
 
-            if(heap[index].compareTo(heap[parentIndex]) > 0) {
+            if(heap[index].compareTo(heap[parentIndex]) < 0) {
                 swap(index, parentIndex);
                 index = parentIndex;
             } else {
@@ -60,14 +60,14 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
         //think through this.
         while(leftChild(index) < size) {
             int leftChildValue = leftChild(index);
-            int largeValue = leftChildValue;
+            int smallestValue = leftChildValue;
             int rightChildValue = rightChild(index);
 
-            if(rightChildValue < size && heap[rightChildValue].compareTo(heap[leftChildValue]) > 0) {
-                largeValue = rightChildValue;
+            if(rightChildValue < size && heap[rightChildValue].compareTo(heap[leftChildValue]) < 0) {
+                smallestValue = rightChildValue;
             }
 
-            if(heap[index].compareTo(heap[rightChildValue]) < 0) {
+            if(heap[index].compareTo(heap[rightChildValue]) > 0) {
                 swap(index, rightChildValue);
                 index = rightChildValue;
             } else {
