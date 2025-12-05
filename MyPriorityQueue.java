@@ -67,9 +67,9 @@ public class MyPriorityQueue<T extends Comparable<T>> implements SimplePQ<T> {
                 smallestValue = rightChildValue;
             }
 
-            if(heap[index].compareTo(heap[rightChildValue]) > 0) {
-                swap(index, rightChildValue);
-                index = rightChildValue;
+            if(heap[index].compareTo(heap[smallestValue]) > 0) {
+                swap(index, smallestValue);
+                index = smallestValue;
             } else {
                 break;
             }
